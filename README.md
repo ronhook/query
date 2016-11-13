@@ -8,9 +8,8 @@ A lightweight ES6 query selector
 * FireFox 49.0.2
 This will need transpilation to support older browsers like Internet Explorer.
 
-### Methods
 ----------------------------------------------------------------------------------------------------------------------
-#### Query
+## Query
 **Paramters**
 
 * selector (String) A string for selecting a list of nodes
@@ -27,7 +26,7 @@ let Q = new Query('.className');
 Query Object
 
 ----------------------------------------------------------------------------------------------------------------------
-#### select
+## select
 **Paramters**
 
 * selector (String) A string for selecting a list of nodes
