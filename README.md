@@ -9,7 +9,7 @@ A lightweight ES6 query selector
 This will need transpilation to support older browsers like Internet Explorer.
 
 ### Methods
-
+----------------------------------------------------------------------------------------------------------------------
 #### Query
 **Paramters**
 
@@ -22,9 +22,9 @@ let Q = new Query();
 ```javascript
 let Q = new Query('.className');
 ````
-### Returns
+**Returns**
 Query Object
-
+----------------------------------------------------------------------------------------------------------------------
 #### select
 **Paramters**
 
@@ -35,9 +35,9 @@ Query Object
 let Q = new Query();
 Q.select('.className');
 ````
-### Returns
+**Returns**
 Query Object
-
+----------------------------------------------------------------------------------------------------------------------
 #### before
 Adds html/text before each node
 **Parameters**
@@ -51,9 +51,9 @@ Q.select(".className").before("<div>Some Text</div>");
 // becomes
 // <div>Some Text</div><p class="className">Text</p>
 ````
-### Returns
+**Returns**
 Query Object
-
+----------------------------------------------------------------------------------------------------------------------
 #### after
 Adds html/text after each node
 **Parameters**
@@ -67,9 +67,9 @@ Q.select(".className").after("<div>Some Text</div>");
 // becomes
 // <p class="className">Text</p><div>Some Text</div>
 ````
-### Returns
+**Returns**
 Query Object
-
+----------------------------------------------------------------------------------------------------------------------
 #### start
 Adds html/text after inside each node as the first child
 **Parameters**
@@ -83,9 +83,9 @@ Q.select(".className").start("<div>Some Text</div>");
 // becomes
 // <p class="className"><div>Text</div>Some Text</p>
 ````
-### Returns
+**Returns**
 Query Object
-
+----------------------------------------------------------------------------------------------------------------------
 #### end
 Adds html/text after inside each node as the last child
 **Parameters**
@@ -99,9 +99,9 @@ Q.select(".className").end("<div>Some Text</div>");
 // becomes
 // <p class="className">Text<div>Some Text</div></p>
 ````
-### Returns
+**Returns**
 Query Object
-
+----------------------------------------------------------------------------------------------------------------------
 #### empty
 Removes the contents from each node
 **Parameters**
@@ -114,9 +114,9 @@ Q.select(".className").empty();
 // becomes
 // <p class="className"></p>
 ````
-### Returns
+**Returns**
 Query Object
-
+----------------------------------------------------------------------------------------------------------------------
 #### html
 Removes the contents from each node
 **Parameters**
@@ -129,9 +129,9 @@ Q.select(".className").html("<div>Some Text</div>");
 // becomes
 // <p class="className">"<div>Some Text</div>"</p>
 ````
-### Returns
+**Returns**
 Query Object
-
+----------------------------------------------------------------------------------------------------------------------
 #### prop
 Gets/Sets a dom attribute for each node
 **Parameters**
@@ -152,5 +152,5 @@ Q.select(".link").prop("href", "http://www.google.com");
 // becomes
 // <a class="link" href="http://www.google.com">Text</a>
 ````
-### Returns
+**Returns**
 Query Object
