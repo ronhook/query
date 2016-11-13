@@ -131,7 +131,7 @@ Q.select(".className").html("<div>Some Text</div>");
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-#### prop
+## prop
 Gets/Sets a dom attribute for each node
 **Parameters**
 * attribute (String) The attribute to return the value of
@@ -153,7 +153,7 @@ Q.select(".link").prop("href", "http://www.google.com");
 ````
 **Returns** Query Object | Value
 *********************************************************************************************************************
-#### each
+## each
 Applies a function to each node
 **Parameters**
 * function (Function) The function to execute
@@ -167,7 +167,7 @@ Q.select(".link").each(function(node){
 ````
 **Returns** Query Object | Value
 *********************************************************************************************************************
-#### once
+## once
 Executes a function once during a key chain
 **Parameters**
 * function (Function) The function to execute
