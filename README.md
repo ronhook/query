@@ -14,7 +14,7 @@ This will need transpilation to support older browsers like Internet Explorer.
 **Paramters**
  
 * selector (String) A string for selecting a list of nodes
-* parent (Object<Node>) A parent node to run the query against
+* parent (Node) A parent node to run the query against
 
 ```javascript
 let Q = new Query();
