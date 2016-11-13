@@ -6,6 +6,7 @@ A lightweight ES6 query selector
 * Chrome Desktop 54.0.2840.99 m
 * Edge 14.14393
 * FireFox 49.0.2
+
 This will need transpilation to support older browsers like Internet Explorer.
 
 *********************************************************************************************************************
@@ -45,6 +46,7 @@ Q.select(".className", document.getElementById("myId"));
 *********************************************************************************************************************
 ## before
 Adds html/text before each node
+
 **Parameters**
 
 * html (String) A string of html or plain text
@@ -60,6 +62,7 @@ Q.select(".className").before("<div>Some Text</div>");
 *********************************************************************************************************************
 ## after
 Adds html/text after each node
+
 **Parameters**
 
 * html (String) A string of html or plain text
@@ -75,6 +78,7 @@ Q.select(".className").after("<div>Some Text</div>");
 *********************************************************************************************************************
 ## start
 Adds html/text after inside each node as the first child
+
 **Parameters**
 
 * html (String) A string of html or plain text
@@ -90,6 +94,7 @@ Q.select(".className").start("<div>Some Text</div>");
 *********************************************************************************************************************
 ## end
 Adds html/text after inside each node as the last child
+
 **Parameters**
 
 * html (String) A string of html or plain text
@@ -105,6 +110,7 @@ Q.select(".className").end("<div>Some Text</div>");
 *********************************************************************************************************************
 ## empty
 Removes the contents from each node
+
 **Parameters**
 
 none
@@ -119,6 +125,7 @@ Q.select(".className").empty();
 *********************************************************************************************************************
 ## html
 Replaces the html of each node
+
 **Parameters**
 * html (String) A string of html or plain text
 
@@ -155,6 +162,7 @@ Q.select(".link").prop("href", "http://www.google.com");
 *********************************************************************************************************************
 ## each
 Applies a function to each node
+
 **Parameters**
 * function (Function) The function to execute
 * useDom (Boolean) When true will apply the function against a node. When false will apply the function against a Query object.
@@ -169,9 +177,10 @@ Q.select(".link").each(function(node){
 *********************************************************************************************************************
 ## once
 Executes a function once during a key chain
+
 **Parameters**
 * function (Function) The function to execute
-* ...parameterss (Values) A list of parameters to apply to the function
+* ...parameters (Values) A list of parameters to apply to the function
 
 ```javascript
 let Q = new Query();
