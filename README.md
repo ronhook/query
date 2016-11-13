@@ -118,7 +118,7 @@ Q.select(".className").empty();
 **Returns** Query Object
 *********************************************************************************************************************
 ## html
-Removes the contents from each node
+Replaces the html of each node
 **Parameters**
 * html (String) A string of html or plain text
 
@@ -180,4 +180,4 @@ Q.select(".link").once(function(a,b){
     // outputs 4,5
 },4,5).select(".anotherClass");
 ````
-**Returns** Query Object | Value
+**Returns** Query Object
