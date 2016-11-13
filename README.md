@@ -8,7 +8,7 @@ A lightweight ES6 query selector
 * FireFox 49.0.2
 This will need transpilation to support older browsers like Internet Explorer.
 
-----------------------------------------------------------------------------------------------------------------------
+*********************************************************************************************************************
 ## Query
 **Paramters**
 
@@ -19,10 +19,12 @@ This will need transpilation to support older browsers like Internet Explorer.
 let Q = new Query();
 ````
 ```javascript
-let Q = new Query('.className');
+let Q = new Query(".className");
 ````
-**Returns**
-Query Object
+```javascript
+let Q = new Query(".className", document.getElementById("myId"));
+````
+**Returns** Query Object
 *********************************************************************************************************************
 ## select
 **Paramters**
@@ -32,12 +34,16 @@ Query Object
 
 ```javascript
 let Q = new Query();
-Q.select('.className');
+Q.select(".className");
 ````
-**Returns**
-Query Object
-----------------------------------------------------------------------------------------------------------------------
-#### before
+
+```javascript
+let Q = new Query();
+Q.select(".className", document.getElementById("myId"));
+````
+**Returns** Query Object
+*********************************************************************************************************************
+## before
 Adds html/text before each node
 **Parameters**
 
@@ -50,10 +56,9 @@ Q.select(".className").before("<div>Some Text</div>");
 // becomes
 // <div>Some Text</div><p class="className">Text</p>
 ````
-**Returns**
-Query Object
-----------------------------------------------------------------------------------------------------------------------
-#### after
+**Returns** Query Object
+*********************************************************************************************************************
+## after
 Adds html/text after each node
 **Parameters**
 
@@ -66,10 +71,9 @@ Q.select(".className").after("<div>Some Text</div>");
 // becomes
 // <p class="className">Text</p><div>Some Text</div>
 ````
-**Returns**
-Query Object
-----------------------------------------------------------------------------------------------------------------------
-#### start
+**Returns** Query Object
+*********************************************************************************************************************
+## start
 Adds html/text after inside each node as the first child
 **Parameters**
 
@@ -82,10 +86,9 @@ Q.select(".className").start("<div>Some Text</div>");
 // becomes
 // <p class="className"><div>Text</div>Some Text</p>
 ````
-**Returns**
-Query Object
-----------------------------------------------------------------------------------------------------------------------
-#### end
+**Returns** Query Object
+*********************************************************************************************************************
+## end
 Adds html/text after inside each node as the last child
 **Parameters**
 
@@ -98,10 +101,9 @@ Q.select(".className").end("<div>Some Text</div>");
 // becomes
 // <p class="className">Text<div>Some Text</div></p>
 ````
-**Returns**
-Query Object
-----------------------------------------------------------------------------------------------------------------------
-#### empty
+**Returns** Query Object
+*********************************************************************************************************************
+## empty
 Removes the contents from each node
 **Parameters**
 
@@ -113,10 +115,9 @@ Q.select(".className").empty();
 // becomes
 // <p class="className"></p>
 ````
-**Returns**
-Query Object
-----------------------------------------------------------------------------------------------------------------------
-#### html
+**Returns** Query Object
+*********************************************************************************************************************
+## html
 Removes the contents from each node
 **Parameters**
 * html (String) A string of html or plain text
@@ -128,9 +129,8 @@ Q.select(".className").html("<div>Some Text</div>");
 // becomes
 // <p class="className">"<div>Some Text</div>"</p>
 ````
-**Returns**
-Query Object
-----------------------------------------------------------------------------------------------------------------------
+**Returns** Query Object
+*********************************************************************************************************************
 #### prop
 Gets/Sets a dom attribute for each node
 **Parameters**
@@ -151,5 +151,33 @@ Q.select(".link").prop("href", "http://www.google.com");
 // becomes
 // <a class="link" href="http://www.google.com">Text</a>
 ````
-**Returns**
-Query Object
+**Returns** Query Object | Value
+*********************************************************************************************************************
+#### each
+Applies a function to each node
+**Parameters**
+* function (Function) The function to execute
+* useDom (Boolean) When true will apply the function against a node. When false will apply the function against a Query object.
+
+```javascript
+let Q = new Query();
+Q.select(".link").each(function(node){
+    console.log(node.prop("href"));
+});
+````
+**Returns** Query Object | Value
+*********************************************************************************************************************
+#### once
+Executes a function once during a key chain
+**Parameters**
+* function (Function) The function to execute
+* ...parameterss (Values) A list of parameters to apply to the function
+
+```javascript
+let Q = new Query();
+Q.select(".link").once(function(a,b){
+    console.log(a,b);
+    // outputs 4,5
+},4,5).select(".anotherClass");
+````
+**Returns** Query Object | Value
