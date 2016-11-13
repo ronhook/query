@@ -2,4 +2,18 @@
 
 A lightweight ES6 query selector
 
-## Supported browsers
+## Tested browsers
+* Chrome Desktop 54.0.2840.99 m
+* Edge 14.14393
+* FireFox 49.0.2
+This will need transpilation to support older browsers like Internet Explorer.
+
+## Methods
+
+### Query
+```javascript
+let Q = new Query();
+````
+```javascript
+let Q = new Query('.className');
+````
