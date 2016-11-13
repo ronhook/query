@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Query Selector</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			*{
+				box-sizing: border-box;
+				font-family: 'Roboto Slab', serif;
+			}
+			html{
+				font-size: 16px;
+				line-height: 1.4;
+				color: #333;
+				margin: 0;
+			}
+			body{
+				margin: 0;
+			}
+			header{
+				background-color: #347bed;
+				color: #fff;
+				font-size: 2rem;
+			}
+			.content{
+				max-width: 1200px;
+				padding: 30px;;
+				margin: 0 auto;
+			}
+            .find-me span {
+                padding: 10px 17px;
+                display: inline-block;
+                margin-right: 10px;
+                border: 1px solid rgba(0,0,0,.5);
+                cursor: pointer;
+            }
+            .find-me span:nth-child(even){
+                background-color: rgba(0,0,0,.2);
+            }
+            .find-me span.target.clicked {
+                background-color: #347bed;
+            }
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="content">Q Query</div>
+		</header>
+        <main class="content">
+            <div class="find-me">
+                <span class="one target" style="color: green;">One</span>
+                <span class="two target">Two</span>
+                <span class="three target">Three</span>
+            </div>
+        </main>
+		<script src="query.js" async></script>
+		<script src="script.js" async></script>
+		<link async href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+	</body>
+</html>
