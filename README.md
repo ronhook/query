@@ -220,3 +220,60 @@ let Q = new Query();
 Q.select(".link").toggle('clicked');
 ````
 **Returns** Query Object
+*********************************************************************************************************************
+## .addClass(class)
+Adds a class to the nodes
+
+**Parameters**
+* class (String) The class to add
+
+```javascript
+let Q = new Query();
+Q.select(".link").addClass('clicked');
+````
+**Returns** Query Object
+*********************************************************************************************************************
+## .removeClass(class)
+Removes a class from the nodes
+
+**Parameters**
+* class (String) The class to remove
+
+```javascript
+let Q = new Query();
+Q.select(".link").removeClass('clicked');
+````
+**Returns** Query Object
+*********************************************************************************************************************
+## .css(class, [value])
+Gets/Sets a css value
+
+**Parameters**
+* style (String) The style to set or change
+* value (String) The value to apply
+
+```javascript
+let Q = new Query();
+console.log(Q.select(".link").css('color'));
+````
+```javascript
+let Q = new Query();
+Q.select(".link").css('color', 'blue');
+````
+**Returns** Query Object
+*********************************************************************************************************************
+## .find(selector)
+Gets/Sets a css value
+
+**Parameters**
+* selector (String) The style to set or change
+
+```javascript
+let Q = new Query();
+console.log(Q.select(".link").css('color'));
+````
+```javascript
+let Q = new Query();
+Q.select(".link").css('color', 'blue');
+````
+**Returns** Query Object
