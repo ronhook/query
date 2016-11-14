@@ -1,15 +1,18 @@
 # Query
 
-A lightweight ES6 query selector
+A lightweight ES6 query selector that works with native JavaScript methods. It will support all queries supported with .querySelectorAll() [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll).
 
 #### Tested browsers
 * Chrome Desktop 54.0.2840.99 m
 * Edge 14.14393
 * FireFox 49.0.2
-This will need transpilation to support older browsers like Internet Explorer.
+
+This will need to be transpiled to support older browsers like Internet Explorer.
 
 *********************************************************************************************************************
-## Query
+## Query([selector, parent])
+The class constructor.
+
 **Paramters**
 
 * selector (String) A string for selecting a list of nodes
@@ -26,8 +29,8 @@ let Q = new Query(".className", document.getElementById("myId"));
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## select
-**Paramters**
+## .select(selector, [parent])
+**Parameters**
 
 * selector (String) A string for selecting a list of nodes
 * parent (Node) A parent node to run the query against
@@ -43,8 +46,9 @@ Q.select(".className", document.getElementById("myId"));
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## before
+## .before(html)
 Adds html/text before each node
+
 **Parameters**
 
 * html (String) A string of html or plain text
@@ -58,8 +62,9 @@ Q.select(".className").before("<div>Some Text</div>");
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## after
+## .after(html)
 Adds html/text after each node
+
 **Parameters**
 
 * html (String) A string of html or plain text
@@ -73,8 +78,9 @@ Q.select(".className").after("<div>Some Text</div>");
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## start
+## .start(html)
 Adds html/text after inside each node as the first child
+
 **Parameters**
 
 * html (String) A string of html or plain text
@@ -88,8 +94,9 @@ Q.select(".className").start("<div>Some Text</div>");
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## end
+## .end(html)
 Adds html/text after inside each node as the last child
+
 **Parameters**
 
 * html (String) A string of html or plain text
@@ -103,8 +110,9 @@ Q.select(".className").end("<div>Some Text</div>");
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## empty
+## .empty()
 Removes the contents from each node
+
 **Parameters**
 
 none
@@ -117,8 +125,9 @@ Q.select(".className").empty();
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## html
+## .html(html)
 Replaces the html of each node
+
 **Parameters**
 * html (String) A string of html or plain text
 
@@ -131,7 +140,7 @@ Q.select(".className").html("<div>Some Text</div>");
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## prop
+## .prop(attribute, [value])
 Gets/Sets a dom attribute for each node
 **Parameters**
 * attribute (String) The attribute to return the value of
@@ -153,8 +162,9 @@ Q.select(".link").prop("href", "http://www.google.com");
 ````
 **Returns** Query Object | Value
 *********************************************************************************************************************
-## each
+## .each(function, [useDom])
 Applies a function to each node
+
 **Parameters**
 * function (Function) The function to execute
 * useDom (Boolean) When true will apply the function against a node. When false will apply the function against a Query object.
@@ -167,11 +177,12 @@ Q.select(".link").each(function(node){
 ````
 **Returns** Query Object | Value
 *********************************************************************************************************************
-## once
+## .once(function, [...parameters])
 Executes a function once during a key chain
+
 **Parameters**
 * function (Function) The function to execute
-* ...parameterss (Values) A list of parameters to apply to the function
+* ...parameters (Values) A list of parameters to apply to the function
 
 ```javascript
 let Q = new Query();
@@ -179,5 +190,33 @@ Q.select(".link").once(function(a,b){
     console.log(a,b);
     // outputs 4,5
 },4,5).select(".anotherClass");
+````
+**Returns** Query Object
+*********************************************************************************************************************
+## .listen(event, function, [allowBubble])
+Adds an eventListener to the nodes
+
+**Parameters**
+* event (String) The event to listen for
+* function (Function) The function to execute
+* allowBubble (Boolean) When true will allow the event to bubble up
+
+```javascript
+let Q = new Query();
+Q.select(".link").listen('click', function(node){
+    console.log("clicked");
+});
+````
+**Returns** Query Object
+*********************************************************************************************************************
+## .toggle(class)
+Alternatively adds and removes a class from the nodes
+
+**Parameters**
+* class (String) The class to add and remove
+
+```javascript
+let Q = new Query();
+Q.select(".link").toggle('clicked');
 ````
 **Returns** Query Object
