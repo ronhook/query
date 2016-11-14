@@ -285,7 +285,7 @@ class Query {
         });
     }
     /*
-     *
+     * Gets/Sets a css value
      * @param {String|Object} styles
      * @param {String} value
      * @returns {Query|String}
@@ -419,7 +419,7 @@ class Query {
         });
     }
    /*
-    * Get the immediate next sibling or the next that matches the selector
+    * Get the immediate next sibling or the next sibling that matches the selector
     * @param {String|Boolean} sel
     * @returns {Query}
     */
