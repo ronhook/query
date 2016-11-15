@@ -229,7 +229,7 @@ Adds a class to the nodes
 
 ```javascript
 let Q = new Query();
-Q.select(".link").addClass('clicked');
+Q.select(".link").addClass("clicked");
 ````
 **Returns** Query Object
 *********************************************************************************************************************
@@ -241,7 +241,7 @@ Removes a class from the nodes
 
 ```javascript
 let Q = new Query();
-Q.select(".link").removeClass('clicked');
+Q.select(".link").removeClass("clicked");
 ````
 **Returns** Query Object
 *********************************************************************************************************************
@@ -254,26 +254,70 @@ Gets/Sets a css value
 
 ```javascript
 let Q = new Query();
-console.log(Q.select(".link").css('color'));
+console.log(Q.select(".link").css("color"));
 ````
 ```javascript
 let Q = new Query();
-Q.select(".link").css('color', 'blue');
+Q.select(".link").css("color", "blue");
+````
+**Returns** Query Object | Value
+*********************************************************************************************************************
+## .find(selector)
+Finds children of the current nodes
+
+**Parameters**
+* selector (String) A string for selecting a list of child nodes
+
+```javascript
+let Q = new Query();
+Q.select("div").find("a");
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## .find(selector)
-Gets/Sets a css value
+## .parent([selector])
+Finds parent of the current nodes
 
 **Parameters**
-* selector (String) The style to set or change
+* selector (String) When set will find the parent node that matches the selector. When not set will return the immediate parent.
 
 ```javascript
 let Q = new Query();
-console.log(Q.select(".link").css('color'));
+Q.select("a").parent();
 ````
 ```javascript
 let Q = new Query();
-Q.select(".link").css('color', 'blue');
+Q.select("a").parent("div");
+````
+**Returns** Query Object
+*********************************************************************************************************************
+## .next([selector])
+Get the immediate next sibling or the next sibling that matches the selector
+
+**Parameters**
+* selector (String) When set will find the next sibling node that matches the selector. When not set will return the immediate next sibling.
+
+```javascript
+let Q = new Query();
+Q.select("a").next();
+````
+```javascript
+let Q = new Query();
+Q.select("a").next("span");
+````
+**Returns** Query Object
+*********************************************************************************************************************
+## .prev([selector])
+Get the immediate previous sibling or the previous sibling that matches the selector
+
+**Parameters**
+* selector (String) When set will find the next sibling node that matches the selector. When not set will return the immediate next sibling.
+
+```javascript
+let Q = new Query();
+Q.select("a").next();
+````
+```javascript
+let Q = new Query();
+Q.select("a").next("span");
 ````
 **Returns** Query Object
