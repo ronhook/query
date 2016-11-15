@@ -167,11 +167,17 @@ class Query {
      * @param {String} html
      * @returns {Query}
      */
-    html (html){
+    html (html = false){
         this.nodes.forEach(function(node){
-            node.innerHTML = html;
+            if (html) {
+                node.innerHTML = html;
+            } else {
+                return node.innerHTML;
+            }
         });
-        this._execScripts(html);
+        if (html) {
+            this._execScripts(html);
+        }
         return this;
     }
     /*
