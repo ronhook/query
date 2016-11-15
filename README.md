@@ -321,3 +321,15 @@ let Q = new Query();
 Q.select("a").next("span");
 ````
 **Returns** Query Object
+*********************************************************************************************************************
+## .is(selector)
+Checks if at least one of the nodes matches the selector
+
+**Parameters**
+* selector (String) A string for testing against the nodes
+
+```javascript
+let Q = new Query();
+console.log(Q.select("a").is('.class'));
+````
+**Returns** Boolean
