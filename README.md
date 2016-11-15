@@ -125,11 +125,11 @@ Q.select(".className").empty();
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## .html(html)
-Replaces the html of each node
+## .html([html])
+Returns the html of the nodes when html is false or sets the html when set.
 
 **Parameters**
-* html (String) A string of html or plain text
+* html (String) When set will replace the html of the nodes.
 
 ```javascript
 let Q = new Query();
@@ -138,7 +138,7 @@ Q.select(".className").html("<div>Some Text</div>");
 // becomes
 // <p class="className">"<div>Some Text</div>"</p>
 ````
-**Returns** Query Object
+**Returns** Query Object | String
 *********************************************************************************************************************
 ## .prop(attribute, [value])
 Gets/Sets a dom attribute for each node
@@ -321,3 +321,15 @@ let Q = new Query();
 Q.select("a").next("span");
 ````
 **Returns** Query Object
+*********************************************************************************************************************
+## .is(selector)
+Checks if at least one of the nodes matches the selector
+
+**Parameters**
+* selector (String) A string for testing against the nodes
+
+```javascript
+let Q = new Query();
+console.log(Q.select("a").is('.class'));
+````
+**Returns** Boolean

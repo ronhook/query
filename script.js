@@ -23,8 +23,6 @@ window.onload = function() {
     */
     Q.select('span.target');
     console.clear();
-    console.log('Start:', Q.once(function(a, b = 'nope'){
-        console.log('length', a, b);
-    }, 'h').after('hmm'));
+    console.log('Parent:', Q.parent('.content').is('div'));
 };
 

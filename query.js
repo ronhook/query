@@ -167,12 +167,19 @@ class Query {
      * @param {String} html
      * @returns {Query}
      */
-    html (html){
+    html (html = false){
+        let val = '';
         this.nodes.forEach(function(node){
-            node.innerHTML = html;
+            if (html) {
+                node.innerHTML = html;
+            } else {
+                val = node.innerHTML;
+            }
         });
-        this._execScripts(html);
-        return this;
+        if (html) {
+            this._execScripts(html);
+        }
+        return html ? this : val;
     }
     /*
      * Turns a html string into html elements
@@ -191,14 +198,15 @@ class Query {
      * @returns {Query}
      */
     prop (attr, val = false) {
+        let prop = '';
         this.nodes.forEach(function(node){
             if(val !== false){
                 node.setAttribute(attr, val);
             }else{
-                return node.getAttribute(attr);
+                prop = node.getAttribute(attr);
             }
         });
-        return this;
+        return val ? this : prop;
     }
     /*
      * Applies a function to each node
@@ -337,16 +345,55 @@ class Query {
     parent (sel = false) {
         let newNodes = [];
         this.nodes.forEach(function(node){
-            let parent = node.parentNode;
-            while (parent && (parent.nodeType != 1 || (sel ? !parent.matches(sel) : false))) {
-                parent = parent.parentNode;
+            let parent = false;
+            if (sel && node.closest) {
+                parent = node.closest(sel);
+            } else {
+                parent = node.parentNode;
+                while (parent && (parent.nodeType != 1 || (sel ? !this._matches(parent, sel) : false))) {
+                    parent = parent.parentNode;
+                }
+                if (sel && !this._matches(parent, sel)) {
+                    parent = false;
+                }
             }
             if(parent && parent.nodeType == 1){
                 newNodes.push(parent);
             }
-        });
+        }, this);
         this._setNodes(newNodes);
         return this;
+    }
+    /*
+     * Checks if at least one of the nodes matches the selector
+     * @param {String} sel
+     * @returns {Query.is@call;_matches|Boolean}
+     */
+    is (sel) {
+        let matched = false
+        this.nodes.forEach(function(node){
+            if (!matched) {
+                matched = this._matches(node, sel);
+            }
+        }, this);
+        return matched;
+    }
+    /*
+     * Tests if an objects matches the selector
+     * @param {Node} node
+     * @param {String} sel
+     * @returns {Boolean}
+     */
+    _matches (node, sel) {
+        if (Element.prototype.matches) {
+            return node.matches(sel);
+        }
+        if (!node) {
+            return false;
+        }
+		let nodes = (node.parentNode || node.document).querySelectorAll(sel), i = -1;
+		while (nodes[++i] && nodes[i] != node);
+		return !!nodes[i];
     }
     /*
      * replaces the current nodes with a new set
@@ -446,13 +493,13 @@ class Query {
         let newNodes = [];
         this.nodes.forEach(function(node){
             let sibling = next ? node.nextElementSibling : node.previousElementSibling;
-            while (sibling && (sibling.nodeType != 1 || (sel ? !sibling.matches(sel) : true))) {
+            while (sibling && (sibling.nodeType != 1 || (sel ? !this._matches(sibling, sel) : true))) {
                 sibling = next ? sibling.nextElementSibling : sibling.previousElementSibling;
             }
             if(sibling && sibling.nodeType == 1){
                 newNodes.push(sibling);
             }
-        });
+        }, this);
         this._setNodes(newNodes);
     }
 };
