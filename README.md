@@ -333,3 +333,15 @@ let Q = new Query();
 console.log(Q.select("a").is('.class'));
 ````
 **Returns** Boolean
+*********************************************************************************************************************
+## .remove()
+Removes the nodes
+
+**Parameters**
+none
+
+```javascript
+let Q = new Query();
+console.log(Q.select("a").remove());
+````
+**Returns** Query Object

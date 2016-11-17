@@ -21,8 +21,8 @@ window.onload = function() {
     console.log('Find:', Q.select('.content').find('span'));
     console.log('Parent:', Q.select('.one, .two').parent(".content"));
     */
-    Q.select('span.target');
-    console.clear();
-    console.log('Parent:', Q.parent('.content').is('div'));
+    Q.select('span.target').remove();
+    //console.clear();
+    //console.log('Parent:', Q.parent('.content').is('div'));
 };
 

@@ -410,6 +410,17 @@ class Query {
         }, this);
     }
     /*
+     * Removes the nodes
+     * @returns {Query}
+     */
+    remove () {
+        this.nodes.forEach(function(node){
+            node.remove();
+        }, this);
+        this._setNodes([]);
+        return this.
+    }
+    /*
      * Executes scripts in the hrml
      * @param {String} html
      * @returns {undefined}
