@@ -209,6 +209,20 @@ Q.select(".link").listen('click', function(node){
 ````
 **Returns** Query Object
 *********************************************************************************************************************
+## .trigger(event)
+Adds an eventListener to the nodes
+
+**Parameters**
+* event (String) The event to listen for
+
+```javascript
+let Q = new Query();
+Q.select(".link").listen('click', function(node){
+    console.log("clicked");
+}).trigger('click');
+````
+**Returns** Query Object
+*********************************************************************************************************************
 ## .toggle(class)
 Alternatively adds and removes a class from the nodes
 

@@ -249,6 +249,18 @@ class Query {
         return this;
     }
     /*
+     * Triggers an event on the nodes
+     * @param {String} event
+     * @returns {Query}
+     */
+    trigger (event) {
+        this.nodes.forEach(function(node){
+            let ev = new Event(event);
+            node.dispatchEvent(ev);
+        });
+        return this;
+    }
+    /*
      * Adds/Removes a class
      * @param {String} className
      * @returns {Query}
@@ -418,7 +430,7 @@ class Query {
             node.remove();
         }, this);
         this._setNodes([]);
-        return this.
+        return this;
     }
     /*
      * Executes scripts in the hrml
