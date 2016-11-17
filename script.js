@@ -21,8 +21,15 @@ window.onload = function() {
     console.log('Find:', Q.select('.content').find('span'));
     console.log('Parent:', Q.select('.one, .two').parent(".content"));
     */
-    Q.select('span.target');
-    console.clear();
-    console.log('Parent:', Q.parent('.content').is('div'));
+   function me(){
+       console.log('oi');
+   }
+   n = function(){
+       console.log(this);
+   };
+    Q.select('span.target').listen('click', me).listen('mousedown', n).listen('mouseup', function(){
+    }).removeEvent('click', me).trigger('click');
+    //console.clear();
+    //console.log('Parent:', Q.parent('.content').is('div'));
 };
 
