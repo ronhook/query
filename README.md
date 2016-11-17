@@ -193,7 +193,7 @@ Q.select(".link").once(function(a,b){
 ````
 **Returns** Query Object
 *********************************************************************************************************************
-## .listen(event, function, [allowBubble])
+## .on(event, function, [allowBubble])
 Adds an eventListener to the nodes
 
 **Parameters**
@@ -203,7 +203,7 @@ Adds an eventListener to the nodes
 
 ```javascript
 let Q = new Query();
-Q.select(".link").listen('click', function(node){
+Q.select(".link").on('click', function(event){
     console.log("clicked");
 });
 ````
@@ -217,9 +217,25 @@ Adds an eventListener to the nodes
 
 ```javascript
 let Q = new Query();
-Q.select(".link").listen('click', function(node){
+Q.select(".link").on('click', function(event){
     console.log("clicked");
 }).trigger('click');
+````
+**Returns** Query Object
+*********************************************************************************************************************
+## .off(event)
+Removes a named event added via an eventListener to the nodes
+
+**Parameters**
+* event (String) The event to listen for
+* function (Function) The function to remove
+
+```javascript
+let Q = new Query();
+let F = function(event){
+    console.log("clicked");
+}
+Q.select(".link").on('click', F).off('click', F);
 ````
 **Returns** Query Object
 *********************************************************************************************************************

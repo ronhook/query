@@ -237,14 +237,9 @@ class Query {
      * @param {Boolean} allowBubble
      * @returns {Query}
      */
-    listen (event, func, allowBubble = false) {
+    on (event, func, allowBubble = false) {
         this.nodes.forEach(function(node){
-            node.addEventListener(event, function(e) {
-                if(!allowBubble){
-                    e.stopPropagation();
-                }
-                func.apply(this, [new Query(node), e]);
-            });
+            node.addEventListener(event, func);
         }.bind(this));
         return this;
     }
@@ -257,6 +252,18 @@ class Query {
         this.nodes.forEach(function(node){
             let ev = new Event(event);
             node.dispatchEvent(ev);
+        });
+        return this;
+    }
+    /*
+     * Removes a named event
+     * @param {String} event
+     * @param {Function} func
+     * @returns {Query}
+     */
+    off (event, func) {
+        this.nodes.forEach(function(node){
+            node.removeEventListener(event, func);
         });
         return this;
     }
