@@ -31,10 +31,21 @@ class Query {
        this._setNodes(this._select(sel, parent));
        return this;
     }
+    /*
+     * Adds nodes to the node list
+     * @param {String} sel
+     * @returns {Query}
+     */
     add (sel) {
         this._setNodes(this.nodes.concat(this._select(sel)));
         return this;
     }
+    /*
+     * Gets a list of Dom objects
+     * @param {String} sel
+     * @param {Node} parent
+     * @returns {Array}
+     */
     _select (sel, parent = false) {
         let nodes = [];
         //console.log('type:', this._type(sel), sel);
