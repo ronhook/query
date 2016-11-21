@@ -375,3 +375,12 @@ let Q = new Query();
 console.log(Q.select("a").remove());
 ````
 **Returns** Query Object
+*********************************************************************************************************************
+## .length
+The number of nodes in the node list
+
+```javascript
+let Q = new Query();
+console.log(Q.select("a").length);
+````
+**Returns** Integer
