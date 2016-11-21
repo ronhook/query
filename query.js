@@ -28,9 +28,16 @@ class Query {
      * @returns {self}
      */
     select (sel, parent = false) {
+       this._setNodes(this._select(sel, parent));
+       return this;
+    }
+    add (sel) {
+        this._setNodes(this.nodes.concat(this._select(sel)));
+        return this;
+    }
+    _select (sel, parent = false) {
         let nodes = [];
         //console.log('type:', this._type(sel), sel);
-        //console.log(parent);
         switch(this._type(sel)){
             case "string":
                 parent = parent || document;
@@ -48,8 +55,7 @@ class Query {
                 nodes.push(sel);
                 break;
         }
-       this._setNodes(nodes);
-       return this;
+        return nodes;
     }
     /*
      * Determines the type of element

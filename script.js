@@ -27,9 +27,7 @@ window.onload = function() {
    n = function(){
        console.log(this);
    };
-    Q.select('span.target').listen('click', me).listen('mousedown', n).listen('mouseup', function(){
-    }).removeEvent('click', me).trigger('click');
     //console.clear();
-    //console.log('Parent:', Q.parent('.content').is('div'));
+    console.log('Add:', Q.select('.one').add('.two'));
 };
 
