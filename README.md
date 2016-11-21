@@ -376,6 +376,18 @@ console.log(Q.select("a").remove());
 ````
 **Returns** Query Object
 *********************************************************************************************************************
+## .add(selector)
+Adds nodes to the node list
+
+**Parameters**
+* selector (String) A string for selecting a list of nodes
+
+```javascript
+let Q = new Query();
+Q.select("a.one").add("a.two");
+````
+**Returns** Query Object
+*********************************************************************************************************************
 ## .length
 The number of nodes in the node list
 
