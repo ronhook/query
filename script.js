@@ -29,6 +29,6 @@ window.onload = function() {
    };
     //console.clear();
     console.log('Has:', Q.select('.find-me').has('.two'));
-    console.log('Has:', Q.select('.find-me').has('.fff'));
+    console.log('Has:', Q.select('.find-me span').prop('class'));
 };
 

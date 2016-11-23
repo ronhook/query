@@ -215,15 +215,17 @@ class Query {
      * @returns {Query}
      */
     prop (attr, val = false) {
-        let prop = '';
+        let prop = undefined;
         this.nodes.forEach(function(node){
             if(val !== false){
                 node.setAttribute(attr, val);
             }else{
-                prop = node.getAttribute(attr);
+                if (prop == undefined) {
+                    prop = node.getAttribute(attr);
+                }
             }
         });
-        return val ? this : prop;
+        return val ? this : (prop === undefined ? "" : prop);
     }
     /*
      * Applies a function to each node
