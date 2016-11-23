@@ -28,6 +28,7 @@ window.onload = function() {
        console.log(this);
    };
     //console.clear();
-    console.log('Add:', Q.select('.one').add('.two'));
+    console.log('Has:', Q.select('.find-me').has('.two'));
+    console.log('Has:', Q.select('.find-me').has('.fff'));
 };
 

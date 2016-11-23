@@ -549,5 +549,19 @@ class Query {
         }, this);
         this._setNodes(newNodes);
     }
+    /*
+    * Checks if at least one of the nodes contains the selector
+    * @param {String} sel
+    * @returns {Boolean}
+    */
+    has(sel) {
+        let found = false
+        this.nodes.forEach(function(node){
+            if (!found) {
+                found = node.querySelectorAll(sel).length > 0;
+            }
+        }, this);
+        return found;
+    }
 };
 
