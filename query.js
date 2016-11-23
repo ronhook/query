@@ -234,8 +234,8 @@ class Query {
      * @returns {Query}
      */
     each (func, domNode = false) {
-        this.nodes.forEach(function(node) {
-            func.apply(this, [domNode ? node  : new Query(node)]);
+        this.nodes.forEach(function(node, index) {
+            func.apply(this, [domNode ? node  : new Query(node), index]);
         }.bind(this));
         return this;
     }
@@ -564,6 +564,28 @@ class Query {
             }
         }, this);
         return found;
+    }
+    /*
+    * Reduces the nodes by testing with a function
+    * @param {Function} test
+    * @returns {Query}
+    */
+    filter(test) {
+        // Create a set of Query objects for each node
+        let nodes = [];
+        this.nodes.forEach(function(node){
+            nodes.push(new Query(node));
+        });
+        // Filter the nodes
+        let filtered = nodes.filter(test);
+        // Return the list back to node objects
+        let newNodes = [];
+        filtered.forEach(function(node){
+            newNodes.push(node);
+        });
+        // Update the nodes list
+        this._setNodes(newNodes);
+        return this
     }
 };
 

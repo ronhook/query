@@ -28,7 +28,9 @@ window.onload = function() {
        console.log(this);
    };
     //console.clear();
-    console.log('Has:', Q.select('.find-me').has('.two'));
-    console.log('Has:', Q.select('.find-me span').prop('class'));
+    Q.select('.find-me span').filter(function(node) {
+        return node.is('.two');
+    });
+    console.log('Has:', Q);
 };
 
