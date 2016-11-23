@@ -1,26 +1,26 @@
 #Change Log
 
 ##1.1.0
-**Selectors**
+**Selectors**  
 .add() .filter()
 
-**Functions**
+**Functions**  
 .has()
 
 ------------------------------------
 
 ##1.0.0
-**Selectors**
+**Selectors**  
 Query    .find()   .next()   .parent()   .prev()   .remove()   .select()
 
-**Manipulation**
+**Manipulation**  
 .after()   .before()   .empty() .end()   .html()   .start()
 
-**Properties**
+**Properties**  
 .addClass()   .css()   .prop()   .removeClass()   .toggle()
 
-**Functions**
+**Functions**  
 .each()   .is()   .length   .once()
 
-**Events**
+**Events**  
 .on()   .trigger()   .off()
