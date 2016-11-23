@@ -7,8 +7,6 @@
 **Functions**  
 .has()
 
-------------------------------------
-
 ##1.0.0
 **Selectors**  
 Query    .find()   .next()   .parent()   .prev()   .remove()   .select()
