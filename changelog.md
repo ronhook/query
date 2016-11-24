@@ -9,16 +9,16 @@
 
 ##1.0.0
 **Selectors**  
-Query    .find()   .next()   .parent()   .prev()   .remove()   .select()
+[Query](https://github.com/ronhook/query/wiki/Query)  &nbsp;  [.find()](https://github.com/ronhook/query/wiki/.find()) &nbsp;  [.next()](https://github.com/ronhook/query/wiki/.next()) &nbsp;  [.parent()](https://github.com/ronhook/query/wiki/.parent())  &nbsp; [.prev()](https://github.com/ronhook/query/wiki/.prev()) &nbsp;  [.remove()](https://github.com/ronhook/query/wiki/.remove()) &nbsp;  [.select()](https://github.com/ronhook/query/wiki/.select())
 
 **Manipulation**  
-.after()   .before()   .empty() .end()   .html()   .start()
+.after() &nbsp;  .before() &nbsp;  .empty() &nbsp; .end() &nbsp;  .html() &nbsp;  .start()
 
 **Properties**  
-.addClass()   .css()   .prop()   .removeClass()   .toggle()
+.addClass()  &nbsp; .css()  &nbsp; .prop() &nbsp;  .removeClass()  &nbsp; .toggle()
 
 **Functions**  
-.each()   .is()   .length   .once()
+.each()  &nbsp; .is()  &nbsp; .length  &nbsp; .once()
 
 **Events**  
-.on()   .trigger()   .off()
+.on() &nbsp;  .trigger() &nbsp;  .off()
