@@ -21,16 +21,11 @@ window.onload = function() {
     console.log('Find:', Q.select('.content').find('span'));
     console.log('Parent:', Q.select('.one, .two').parent(".content"));
     */
-   function me(){
-       console.log('oi');
-   }
-   n = function(){
-       console.log(this);
-   };
     //console.clear();
-    Q.select('.find-me span').filter(function(node) {
-        return node.is('.two');
+    Q1 = new Query(".one");
+    Q.select('.find-me span').each(function(node){
+        console.log(node.is('.two'));
     });
-    console.log('Has:', Q);
+    console.log('Q1:', Q1);
 };
 

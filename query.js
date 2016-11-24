@@ -37,7 +37,21 @@ class Query {
      * @returns {Query}
      */
     add (sel) {
-        this._setNodes(this.nodes.concat(this._select(sel)));
+        let nodes = [];
+        switch(this._type(sel)){
+            case "string":
+                nodes = this._select(sel);
+                break;
+            case "node":
+                nodes = [sel];
+                break;
+            case "Query":
+                sel.each(function(node){
+                    nodes.push(node);
+                },true);
+                break;
+        }
+        this._setNodes(this.nodes.concat(nodes));
         return this;
     }
     /*
@@ -48,7 +62,7 @@ class Query {
      */
     _select (sel, parent = false) {
         let nodes = [];
-        //console.log('type:', this._type(sel), sel);
+        //console.log('type:', this._type(sel));
         switch(this._type(sel)){
             case "string":
                 parent = parent || document;
@@ -64,6 +78,11 @@ class Query {
                 break;
             case "node":
                 nodes.push(sel);
+                break;
+            case "Query":
+                sel.each(function(node){
+                    nodes.push(node);
+                },true);
                 break;
         }
         return nodes;
@@ -87,7 +106,9 @@ class Query {
             case "object":
                 if(elem.nodeType == 1){
                     return "node";
-                }else{
+                }else if(elem instanceof Query){
+                    return "Query";
+                } else {
                     return Object.prototype.toString.call(elem).replace(/^\[object (.+)\]$/, "$1").toLowerCase();
                 }
                 break;
@@ -96,7 +117,7 @@ class Query {
     }
     /*
      * Adds html before each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
     before (html) {
@@ -105,7 +126,7 @@ class Query {
     }
     /*
      * Adds html after each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
     after (html) {
@@ -114,7 +135,7 @@ class Query {
     }
     /*
      * Adds html to yhe start of each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
     start (html) {
@@ -123,7 +144,7 @@ class Query {
     }
     /*
      * Adds html to the end of each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
     end (html) {
@@ -132,22 +153,12 @@ class Query {
     }
     /*
      * Adds html before or after each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @param {String} before
      * @returns {undefined}
      */
     _attach (html, before) {
-        switch(this._type(html)){
-            case "stringHTML":
-            case "string":
-                break;
-            /*
-            case "node":
-                nodes = [html];
-                html = html.outerHTML;
-                break;
-            */
-        }
+        html = this._htmlString(html);
         this.nodes.forEach(function(node){
             node.insertAdjacentHTML(before, html);
         }, this);
@@ -181,11 +192,14 @@ class Query {
     }
     /*
      * Adds html to an object
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
     html (html = false){
         let val = '';
+        if (html) {
+            html = this._htmlString(html);
+        }
         this.nodes.forEach(function(node){
             if (html) {
                 node.innerHTML = html;
@@ -198,15 +212,25 @@ class Query {
         }
         return html ? this : val;
     }
-    /*
-     * Turns a html string into html elements
-     * @param {String} html
-     * @returns {Array}
+    /**
+     * Turns a node or Query object node list to html
+     * @param {String|NOde|Query} html
+     * @returns {String}
      */
-    _parseHTML (html) {
-        //let parser = new DOMParser();
-        //let node = parser.parseFromString(html, "text/html").querySelectorAll("body");
-        return new DOMParser().parseFromString(html, "text/html").querySelectorAll("body")[0].childNodes;
+    _htmlString(html) {
+        switch(this._type(html)){
+            case "node":
+                html = html.outerHTML;
+                break;
+            case "Query":
+                let temp = "";
+                html.each(function(node){
+                    temp += node.outerHTML;
+                }, true);
+                html = temp;
+                break;
+        }
+        return html;
     }
     /*
      * Gets/Sets a dom attribute
@@ -404,16 +428,30 @@ class Query {
     }
     /*
      * Checks if at least one of the nodes matches the selector
-     * @param {String} sel
+     * @param {String|NOde|Query} sel
      * @returns {Query.is@call;_matches|Boolean}
      */
     is (sel) {
-        let matched = false
+        let matched = false, selType = this._type(sel);
         this.nodes.forEach(function(node){
             if (!matched) {
-                matched = this._matches(node, sel);
+                switch(selType){
+                    case "string":
+                        matched = this._matches(node, sel);
+                        break;
+                    case "node":
+                        matched = node == sel;
+                        break;
+                    case "Query":
+                        sel.each(function(sel_node){
+                            if (!matched) {
+                                matched = node == sel_node;
+                            }
+                        },true);
+                        break;
+                }
             }
-        }, this);
+        },this);
         return matched;
     }
     /*
@@ -429,9 +467,9 @@ class Query {
         if (!node) {
             return false;
         }
-		let nodes = (node.parentNode || node.document).querySelectorAll(sel), i = -1;
-		while (nodes[++i] && nodes[i] != node);
-		return !!nodes[i];
+        let nodes = (node.parentNode || node.document).querySelectorAll(sel), i = -1;
+        while (nodes[++i] && nodes[i] != node);
+        return !!nodes[i];
     }
     /*
      * replaces the current nodes with a new set
@@ -470,12 +508,6 @@ class Query {
             case "string":
                 nodeList = this._getNodesFromString(html);
                 break;
-            /*
-            case "node":
-                nodes = [html];
-                html = html.outerHTML;
-                break;
-            */
         }
         nodeList.forEach(function(node){
             this._doScript(this._findScripts(node));
