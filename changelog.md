@@ -2,7 +2,7 @@
 
 ##1.1.0
 **Selectors**  
-.add() .filter()
+.add() &nbsp; .filter()
 
 **Functions**  
 .has()
