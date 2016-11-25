@@ -15,7 +15,7 @@
 [.after()](https://github.com/ronhook/query/wiki/.after()) &nbsp;  [.before()](https://github.com/ronhook/query/wiki/.before()) &nbsp;  [.empty()](https://github.com/ronhook/query/wiki/.empty()) &nbsp; [.end()](https://github.com/ronhook/query/wiki/.end()) &nbsp;  [.html()](https://github.com/ronhook/query/wiki/.html()) &nbsp;  [.start()](https://github.com/ronhook/query/wiki/.start())
 
 **Properties**  
-.addClass()  &nbsp; .css()  &nbsp; .prop() &nbsp;  .removeClass()  &nbsp; .toggle()
+[.addClass()](https://github.com/ronhook/query/wiki/.addClass())  &nbsp; [.css()](https://github.com/ronhook/query/wiki/.css())  &nbsp; [.prop()](https://github.com/ronhook/query/wiki/.prop()) &nbsp;  [.removeClass()](https://github.com/ronhook/query/wiki/.removeClass())  &nbsp; [.toggle()](https://github.com/ronhook/query/wiki/.toggle())
 
 **Functions**  
 .each()  &nbsp; .is()  &nbsp; .length  &nbsp; .once()
