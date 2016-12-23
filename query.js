@@ -196,21 +196,21 @@ class Query {
      * @returns {Query}
      */
     html (html = false) {
-        let val = "";
+        let val = undefined;
         if (html) {
             html = this._htmlString(html);
         }
         this.nodes.forEach(function(node){
             if (html) {
                 node.innerHTML = html;
-            } else {
+            } else if (val == undefined) {
                 val = node.innerHTML;
             }
         });
         if (html) {
             this._execScripts(html);
         }
-        return html ? this : val;
+        return html ? this : (val === undefined ? "" : val);
     }
     /**
      * Sets/Gets text of a node
