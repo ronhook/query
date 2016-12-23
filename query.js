@@ -184,7 +184,7 @@ class Query {
      * Removes all nodes from the object
      * @returns {Query}
      */
-    empty (){
+    empty () {
         this.nodes.forEach(function(node){
             node.innerHTML = "";
         });
@@ -195,8 +195,8 @@ class Query {
      * @param {String|NOde|Query} html
      * @returns {Query}
      */
-    html (html = false){
-        let val = '';
+    html (html = false) {
+        let val = "";
         if (html) {
             html = this._htmlString(html);
         }
@@ -213,12 +213,28 @@ class Query {
         return html ? this : val;
     }
     /**
+     * Sets/Gets text of a node
+     * @param {type} text
+     * @returns {val|Query|String}
+     */
+    text (text = false) {
+        let val = undefined;
+        this.nodes.forEach(function(node){
+            if (text) {
+                node.textContent = text;
+            } else if (val == undefined) {
+                val = node.textContent;
+            }
+        });
+        return text ? this : (val === undefined ? "" : val);
+    }
+    /**
      * Turns a node or Query object node list to html
      * @param {String|NOde|Query} html
      * @returns {String}
      */
     _htmlString(html) {
-        switch(this._type(html)){
+        switch(this._type(html)) {
             case "node":
                 html = html.outerHTML;
                 break;

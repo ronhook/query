@@ -20,12 +20,12 @@ window.onload = function() {
     });
     console.log('Find:', Q.select('.content').find('span'));
     console.log('Parent:', Q.select('.one, .two').parent(".content"));
-    */
     //console.clear();
-    Q1 = new Query(".one");
     Q.select('.find-me span').each(function(node){
         console.log(node.is('.two'));
     });
-    console.log('Q1:', Q1);
+    */
+    Q1 = new Query(".find-me span").text("Hello");
+    console.log('Q1:', Q1.text(), Q1);
 };
 
