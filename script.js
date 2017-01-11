@@ -20,16 +20,12 @@ window.onload = function() {
     });
     console.log('Find:', Q.select('.content').find('span'));
     console.log('Parent:', Q.select('.one, .two').parent(".content"));
-    */
-   function me(){
-       console.log('oi');
-   }
-   n = function(){
-       console.log(this);
-   };
-    Q.select('span.target').listen('click', me).listen('mousedown', n).listen('mouseup', function(){
-    }).removeEvent('click', me).trigger('click');
     //console.clear();
-    //console.log('Parent:', Q.parent('.content').is('div'));
+    Q.select('.find-me span').each(function(node){
+        console.log(node.is('.two'));
+    });
+    */
+    Q1 = new Query(".find-me span").text("Hello");
+    console.log('Q1:', Q1.text(), Q1);
 };
 

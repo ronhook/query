@@ -28,9 +28,41 @@ class Query {
      * @returns {self}
      */
     select (sel, parent = false) {
+       this._setNodes(this._select(sel, parent));
+       return this;
+    }
+    /*
+     * Adds nodes to the node list
+     * @param {String} sel
+     * @returns {Query}
+     */
+    add (sel) {
         let nodes = [];
-        //console.log('type:', this._type(sel), sel);
-        //console.log(parent);
+        switch(this._type(sel)){
+            case "string":
+                nodes = this._select(sel);
+                break;
+            case "node":
+                nodes = [sel];
+                break;
+            case "Query":
+                sel.each(function(node){
+                    nodes.push(node);
+                },true);
+                break;
+        }
+        this._setNodes(this.nodes.concat(nodes));
+        return this;
+    }
+    /*
+     * Gets a list of Dom objects
+     * @param {String} sel
+     * @param {Node} parent
+     * @returns {Array}
+     */
+    _select (sel, parent = false) {
+        let nodes = [];
+        //console.log('type:', this._type(sel));
         switch(this._type(sel)){
             case "string":
                 parent = parent || document;
@@ -47,9 +79,13 @@ class Query {
             case "node":
                 nodes.push(sel);
                 break;
+            case "Query":
+                sel.each(function(node){
+                    nodes.push(node);
+                },true);
+                break;
         }
-       this._setNodes(nodes);
-       return this;
+        return nodes;
     }
     /*
      * Determines the type of element
@@ -70,7 +106,9 @@ class Query {
             case "object":
                 if(elem.nodeType == 1){
                     return "node";
-                }else{
+                }else if(elem instanceof Query){
+                    return "Query";
+                } else {
                     return Object.prototype.toString.call(elem).replace(/^\[object (.+)\]$/, "$1").toLowerCase();
                 }
                 break;
@@ -79,7 +117,7 @@ class Query {
     }
     /*
      * Adds html before each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
     before (html) {
@@ -88,7 +126,7 @@ class Query {
     }
     /*
      * Adds html after each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
     after (html) {
@@ -97,7 +135,7 @@ class Query {
     }
     /*
      * Adds html to yhe start of each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
     start (html) {
@@ -106,7 +144,7 @@ class Query {
     }
     /*
      * Adds html to the end of each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
     end (html) {
@@ -115,22 +153,12 @@ class Query {
     }
     /*
      * Adds html before or after each node
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @param {String} before
      * @returns {undefined}
      */
     _attach (html, before) {
-        switch(this._type(html)){
-            case "stringHTML":
-            case "string":
-                break;
-            /*
-            case "node":
-                nodes = [html];
-                html = html.outerHTML;
-                break;
-            */
-        }
+        html = this._htmlString(html);
         this.nodes.forEach(function(node){
             node.insertAdjacentHTML(before, html);
         }, this);
@@ -156,7 +184,7 @@ class Query {
      * Removes all nodes from the object
      * @returns {Query}
      */
-    empty (){
+    empty () {
         this.nodes.forEach(function(node){
             node.innerHTML = "";
         });
@@ -164,32 +192,61 @@ class Query {
     }
     /*
      * Adds html to an object
-     * @param {String} html
+     * @param {String|NOde|Query} html
      * @returns {Query}
      */
-    html (html = false){
-        let val = '';
+    html (html = false) {
+        let val = undefined;
+        if (html) {
+            html = this._htmlString(html);
+        }
         this.nodes.forEach(function(node){
             if (html) {
                 node.innerHTML = html;
-            } else {
+            } else if (val == undefined) {
                 val = node.innerHTML;
             }
         });
         if (html) {
             this._execScripts(html);
         }
-        return html ? this : val;
+        return html ? this : (val === undefined ? "" : val);
     }
-    /*
-     * Turns a html string into html elements
-     * @param {String} html
-     * @returns {Array}
+    /**
+     * Sets/Gets text of a node
+     * @param {type} text
+     * @returns {val|Query|String}
      */
-    _parseHTML (html) {
-        //let parser = new DOMParser();
-        //let node = parser.parseFromString(html, "text/html").querySelectorAll("body");
-        return new DOMParser().parseFromString(html, "text/html").querySelectorAll("body")[0].childNodes;
+    text (text = false) {
+        let val = undefined;
+        this.nodes.forEach(function(node){
+            if (text) {
+                node.textContent = text;
+            } else if (val == undefined) {
+                val = node.textContent;
+            }
+        });
+        return text ? this : (val === undefined ? "" : val);
+    }
+    /**
+     * Turns a node or Query object node list to html
+     * @param {String|NOde|Query} html
+     * @returns {String}
+     */
+    _htmlString(html) {
+        switch(this._type(html)) {
+            case "node":
+                html = html.outerHTML;
+                break;
+            case "Query":
+                let temp = "";
+                html.each(function(node){
+                    temp += node.outerHTML;
+                }, true);
+                html = temp;
+                break;
+        }
+        return html;
     }
     /*
      * Gets/Sets a dom attribute
@@ -198,15 +255,17 @@ class Query {
      * @returns {Query}
      */
     prop (attr, val = false) {
-        let prop = '';
+        let prop = undefined;
         this.nodes.forEach(function(node){
             if(val !== false){
                 node.setAttribute(attr, val);
             }else{
-                prop = node.getAttribute(attr);
+                if (prop == undefined) {
+                    prop = node.getAttribute(attr);
+                }
             }
         });
-        return val ? this : prop;
+        return val ? this : (prop === undefined ? "" : prop);
     }
     /*
      * Applies a function to each node
@@ -215,8 +274,8 @@ class Query {
      * @returns {Query}
      */
     each (func, domNode = false) {
-        this.nodes.forEach(function(node) {
-            func.apply(this, [domNode ? node  : new Query(node)]);
+        this.nodes.forEach(function(node, index) {
+            func.apply(this, [domNode ? node  : new Query(node), index]);
         }.bind(this));
         return this;
     }
@@ -385,16 +444,30 @@ class Query {
     }
     /*
      * Checks if at least one of the nodes matches the selector
-     * @param {String} sel
+     * @param {String|NOde|Query} sel
      * @returns {Query.is@call;_matches|Boolean}
      */
     is (sel) {
-        let matched = false
+        let matched = false, selType = this._type(sel);
         this.nodes.forEach(function(node){
             if (!matched) {
-                matched = this._matches(node, sel);
+                switch(selType){
+                    case "string":
+                        matched = this._matches(node, sel);
+                        break;
+                    case "node":
+                        matched = node == sel;
+                        break;
+                    case "Query":
+                        sel.each(function(sel_node){
+                            if (!matched) {
+                                matched = node == sel_node;
+                            }
+                        },true);
+                        break;
+                }
             }
-        }, this);
+        },this);
         return matched;
     }
     /*
@@ -410,9 +483,9 @@ class Query {
         if (!node) {
             return false;
         }
-		let nodes = (node.parentNode || node.document).querySelectorAll(sel), i = -1;
-		while (nodes[++i] && nodes[i] != node);
-		return !!nodes[i];
+        let nodes = (node.parentNode || node.document).querySelectorAll(sel), i = -1;
+        while (nodes[++i] && nodes[i] != node);
+        return !!nodes[i];
     }
     /*
      * replaces the current nodes with a new set
@@ -451,12 +524,6 @@ class Query {
             case "string":
                 nodeList = this._getNodesFromString(html);
                 break;
-            /*
-            case "node":
-                nodes = [html];
-                html = html.outerHTML;
-                break;
-            */
         }
         nodeList.forEach(function(node){
             this._doScript(this._findScripts(node));
@@ -531,6 +598,42 @@ class Query {
             }
         }, this);
         this._setNodes(newNodes);
+    }
+    /*
+    * Checks if at least one of the nodes contains the selector
+    * @param {String} sel
+    * @returns {Boolean}
+    */
+    has(sel) {
+        let found = false
+        this.nodes.forEach(function(node){
+            if (!found) {
+                found = node.querySelectorAll(sel).length > 0;
+            }
+        }, this);
+        return found;
+    }
+    /*
+    * Reduces the nodes by testing with a function
+    * @param {Function} test
+    * @returns {Query}
+    */
+    filter(test) {
+        // Create a set of Query objects for each node
+        let nodes = [];
+        this.nodes.forEach(function(node){
+            nodes.push(new Query(node));
+        });
+        // Filter the nodes
+        let filtered = nodes.filter(test);
+        // Return the list back to node objects
+        let newNodes = [];
+        filtered.forEach(function(node){
+            newNodes.push(node);
+        });
+        // Update the nodes list
+        this._setNodes(newNodes);
+        return this
     }
 };
 
