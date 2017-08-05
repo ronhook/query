@@ -2,7 +2,7 @@
 
 ##1.1.0
 **Selectors**  
-.add() &nbsp; .filter()
+[.add()](https://github.com/ronhook/query/wiki/.add()) &nbsp; .filter()
 
 **Manipulation**  
 .text()
