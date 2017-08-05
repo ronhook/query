@@ -3,6 +3,6 @@
 
 @import "{{ site.theme }}";
 
-.wrapper, section {
+.wrapper, section, #header nav {
     max-width: 1200px;
 }
