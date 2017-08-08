@@ -1,8 +1,8 @@
 # Change Log
 
 ## 1.1.0
-**Selectors**
-[.add()](https://github.com/ronhook/query/wiki/.add()) &nbsp; [.filter()](https://github.com/ronhook/query/wiki/.filter())
+**Selectors**  
+[.add()](https://github.com/ronhook/query/wiki/.add()) &nbsp; .filter()
 
 **Manipulation**
 [.text()](https://github.com/ronhook/query/wiki/.text())
