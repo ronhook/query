@@ -8,7 +8,7 @@
 [.text()](https://github.com/ronhook/query/wiki/.text())
 
 **Functions**
-.has()
+[.has()](https://github.com/ronhook/query/wiki/has())
 
 ## 1.0.0
 **Selectors**
