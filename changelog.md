@@ -4,10 +4,10 @@
 **Selectors**  
 [.add()](https://github.com/ronhook/query/wiki/.add()) &nbsp; [.filter()](https://github.com/ronhook/query/wiki/.filter())
 
-**Manipulation**
+**Manipulation**  
 [.text()](https://github.com/ronhook/query/wiki/.text())
 
-**Functions**
+**Functions**  
 [.has()](https://github.com/ronhook/query/wiki/has())
 
 ## 1.0.0
