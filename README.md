@@ -9,4 +9,6 @@ A lightweight ES6 query selector that works with native JavaScript methods. It w
 
 This will need to be transpiled to support older browsers like Internet Explorer.
 
+Official Website: [https://ronhook.github.io/query/](https://ronhook.github.io/query/)
+
 See the [Wiki](https://github.com/ronhook/query/wiki) for a full list of methods.

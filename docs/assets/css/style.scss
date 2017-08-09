@@ -3,6 +3,32 @@
 
 @import "{{ site.theme }}";
 
+@mixin tablet {
+    @media (max-width: #1200px){
+        @content;
+    }
+}
 .wrapper, section, #header nav {
     max-width: 1200px;
+    @include tablet{
+        max-width: 100%;
+    }
 }
+#docs{
+}
+#content{
+
+}
+@supports(display: grid){
+    .wrapper > section{
+        display: grid;
+        grid-template-columns: 900px 300px;
+    }
+    #docs{
+        grid-column: 2;
+    }
+    #content{
+        grid-column: 1;
+    }
+}
+
