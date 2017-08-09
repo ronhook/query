@@ -4,7 +4,7 @@
 @import "{{ site.theme }}";
 
 @mixin tablet {
-    @media (max-width: #1200px){
+    @media (max-width: 1200px){
         @content;
     }
 }
