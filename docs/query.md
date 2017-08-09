@@ -9,7 +9,7 @@ parent (Node) A parent node to run the query against
 
 **Examples**
 
-```
+```JS
     let Q = new Query();
     let Q = new Query(".className");
     let Q = new Query(".className", document.getElementById("myId"));
