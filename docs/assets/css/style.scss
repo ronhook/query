@@ -24,7 +24,6 @@
     max-width: 1200px;
     @include desktop{
         max-width: none;
-        width: 100%;
     }
 }
 #docs{
