@@ -3,14 +3,26 @@
 
 @import "{{ site.theme }}";
 
+@mixin desktop {
+    @media (min-width: 1200px){
+        @content;
+    }
+}
+
 @mixin tablet {
-    @media (max-width: 1200px){
+    @media (max-width: 720px){
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: 480px){
         @content;
     }
 }
 .wrapper, section, #header nav {
     max-width: 1200px;
-    @include tablet{
+    @include desktop{
         max-width: none;
         width: 100%;
     }
@@ -21,9 +33,12 @@
 
 }
 @supports(display: grid){
-    .wrapper > section{
+    .grid{
         display: grid;
-        grid-template-columns: 900px 300px;
+        grid-template-columns: atuo 300px;
+        @include mobile{
+            display: block;
+        }
     }
     #docs{
         grid-column: 2;
