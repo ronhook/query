@@ -4,7 +4,7 @@
 @import "{{ site.theme }}";
 
 @mixin desktop {
-    @media (min-width: 1200px){
+    @media (max-width: 1200px){
         @content;
     }
 }
@@ -35,7 +35,7 @@
 @supports(display: grid){
     .grid{
         display: grid;
-        grid-template-columns: atuo 300px;
+        grid-template-columns: auto 300px;
         @include mobile{
             display: block;
         }
