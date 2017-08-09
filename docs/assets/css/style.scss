@@ -11,7 +11,8 @@
 .wrapper, section, #header nav {
     max-width: 1200px;
     @include tablet{
-        max-width: 100%;
+        max-width: none;
+        width: 100%;
     }
 }
 #docs{
