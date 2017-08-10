@@ -21,5 +21,5 @@ Query Object
 
 **Live Sample**
 
-<p data-height="265" data-theme-id="dark" data-slug-hash="dzRYxw" data-default-tab="js,result" data-user="ronhook" data-embed-version="2" data-pen-title="Query" class="codepen">See the Pen <a href="https://codepen.io/ronhook/pen/dzRYxw/">Query</a> by Ron Hook (<a href="https://codepen.io/ronhook">@ronhook</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<iframe height='265' scrolling='no' title='Query' src='//codepen.io/ronhook/embed/dzRYxw/?height=265&theme-id=dark&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/ronhook/pen/dzRYxw/'>Query</a> by Ron Hook (<a href='https://codepen.io/ronhook'>@ronhook</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
