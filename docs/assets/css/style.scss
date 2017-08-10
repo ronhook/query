@@ -35,15 +35,16 @@
     .grid{
         display: grid;
         grid-template-columns: auto 300px;
+        grid-template-areas: "content docs";
         @include mobile{
             display: block;
         }
     }
     #docs{
-        grid-column: 2;
+        grid-area: docs;
     }
     #content{
-        grid-column: 1;
+        grid-area: content;
     }
 }
 
