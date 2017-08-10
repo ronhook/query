@@ -18,3 +18,6 @@ let Q = new Query(".className", document.getElementById("myId"));
 **Returns** 
 
 Query Object
+
+<p data-height="265" data-theme-id="dark" data-slug-hash="dzRYxw" data-default-tab="result" data-user="ronhook" data-embed-version="2" data-pen-title="dzRYxw" class="codepen">See the Pen <a href="https://codepen.io/ronhook/pen/dzRYxw/">dzRYxw</a> by Ron Hook (<a href="https://codepen.io/ronhook">@ronhook</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
