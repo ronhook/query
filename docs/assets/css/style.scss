@@ -47,4 +47,11 @@
         grid-area: content;
     }
 }
-
+@include mobile{
+    margin-top: 0;
+    #header 
+        nav{
+            dispaly: block;
+        }
+    }
+}
