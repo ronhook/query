@@ -46,6 +46,11 @@
     #content{
         grid-area: content;
     }
+    @include mobile{
+        .grid{
+            display: block;
+        }
+    }
 }
 @include mobile{
     #header {
