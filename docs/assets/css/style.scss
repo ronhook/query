@@ -48,8 +48,8 @@
     }
 }
 @include mobile{
-    margin-top: 0;
-    #header 
+    #header {
+        margin-top: 0;
         nav{
             dispaly: block;
         }
