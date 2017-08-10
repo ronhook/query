@@ -2,3 +2,9 @@ theme: jekyll-theme-midnight
 show_downloads: true
 baseurl: /query
 google_analytics: UA-104147207-1
+collections:
+    docs:
+        - name: Query
+          permalink: /docs/query
+        - name: has()
+          permalink: /docs/has
