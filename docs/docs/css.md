@@ -1,4 +1,4 @@
-**.css(class, [value])**
+**.css(style, [value])**
 
 Gets/Sets a css value
 
