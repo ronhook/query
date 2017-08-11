@@ -4,13 +4,13 @@
 @import "{{ site.theme }}";
 
 @mixin desktop {
-    @media (max-width: 1200px){
+    @media (max-width: 1200px) {
         @content;
     }
 }
 
 @mixin tablet {
-    @media (max-width: 720px){
+    @media (max-width: 720px) {
         @content;
     }
 }
@@ -37,7 +37,7 @@
         padding-top: 8px;
     }
 }
-#docs{
+#docs {
     p a{
         display: inline-block;
         padding: 5px 10px 5px 0;
@@ -49,7 +49,7 @@
 #content{
 
 }
-@supports(display: grid){
+@supports(display: grid) {
     .grid{
         display: grid;
         grid-template-columns: auto 300px;
@@ -61,16 +61,16 @@
     #docs{
         grid-area: docs;
     }
-    #content{
+    #content {
         grid-area: content;
     }
-    @include mobile{
+    @include mobile {
         .grid{
             display: block;
         }
     }
 }
-@include mobile{
+@include mobile {
     #header {
         margin-top: 0;
     }
