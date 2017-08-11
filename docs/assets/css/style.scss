@@ -38,6 +38,7 @@
     }
 }
 #docs {
+    padding-left: 15px;
     p a{
         display: inline-block;
         padding: 5px 10px 5px 0;
@@ -71,6 +72,9 @@
     }
 }
 @include mobile {
+    #docs {
+        padding-left: 0;
+    }
     #header {
         margin-top: 0;
     }
