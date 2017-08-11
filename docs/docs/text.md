@@ -8,7 +8,7 @@ Sets/Gets text of a node
 
 **Returns** 
 
-Query Object | Value
+Query Object \| Value
 
 **Examples**
 
