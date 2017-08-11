@@ -41,6 +41,9 @@
     p a{
         display: inline-block;
         padding: 5px 10px 5px 0;
+        &:active{
+            color: #fff;
+        }
     }
 }
 #content{
