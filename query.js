@@ -68,7 +68,7 @@ class Query {
                 if(parent.nodeType != 1){
                     parent = document;
                 }
-                let found = parent.querySelectorAll(sel);
+                let found = this._selectAll(parent, sel);
                 for (let i=0; i<found.length; i++) {
                     if (found[i].nodeType == 1) {
                         nodes.push(found[i]);
@@ -87,14 +87,27 @@ class Query {
         return nodes;
     }
     /*
+     * Performs a query select against a node
+     * @param {Node} node
+     * @param {String} sel
+     * @returns {Array}
+     */
+    _selectAll(node, sel) {
+        let nodes = [];
+        try {
+            nodes = node.querySelectorAll(sel);
+        } catch (e) {}
+        return nodes;
+    }
+    /*
      * Determines the type of element
      * @param {type} elem
      * @returns {String|Boolean}
      */
     _type (elem) {
-        elem = elem.trim();
         switch(typeof(elem)){
             case "string":
+                elem = elem.trim();
                 // test if the string is a selector or html format
                 let match = elem = this.regHTML.exec(elem);
                 if(match){
@@ -171,7 +184,8 @@ class Query {
      * @returns {Array}
      */
     _getNodesFromString (html) {
-        let nodes       = [];
+        let nodes   = [];
+        html        = "<html><head></head><body>" + html + "</body></html>";
         let parsedNodes = new DOMParser().parseFromString(html, "text/html").querySelectorAll("body")[0].childNodes;
         for (let i=0; i<parsedNodes.length; i++) {
             if (parsedNodes[i].nodeType == 1) {
@@ -405,14 +419,14 @@ class Query {
     find (sel) {
         let newNodes = [];
         this.nodes.forEach(function(node){
-            let obj = node.querySelectorAll(sel);
+            let obj = this._selectAll(node, sel);
             for(let index in obj){
                 if(obj[index].nodeType == 1) {
                     newNodes.push(obj[index]);
                 }
             }
         }, this);
-        this.nodes = newNodes;
+        this._setNodes(newNodes);
         return this;
     }
     /*
@@ -483,7 +497,7 @@ class Query {
         if (!node) {
             return false;
         }
-        let nodes = (node.parentNode || node.document).querySelectorAll(sel), i = -1;
+        let nodes = this._selectAll(node.parentNode || node.document, sel), i = -1;
         while (nodes[++i] && nodes[i] != node);
         return !!nodes[i];
     }
@@ -608,7 +622,7 @@ class Query {
         let found = false
         this.nodes.forEach(function(node){
             if (!found) {
-                found = node.querySelectorAll(sel).length > 0;
+                found = this._selectAll(node, sel).length > 0;
             }
         }, this);
         return found;
