@@ -3,7 +3,7 @@
 * Edge 14.14393
 * FireFox 49.0.2
 
-Current version is 1.1.0
+Current version is 1.1.1
 
 This will need to be transpiled to support older browsers like Internet Explorer and es5 browsers.
 
