@@ -6,5 +6,3 @@
 Current version is 1.1.1
 
 This will need to be transpiled to support older browsers like Internet Explorer and es5 browsers.
-
-See the [Wiki](https://github.com/ronhook/query/wiki) for a full list of methods.
