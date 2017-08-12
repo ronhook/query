@@ -26,8 +26,8 @@ window.onload = function() {
     });
     Q1 = new Query(".find-me span").filter(":nth-child(even)");
     */
-    Q1 = new Query(".find-me").has(".span");
-    console.log('Q1:', Q1);
+    Q1 = new Query(".three").prev(".one");
+    console.log('Q1:', Q1.length, Q1.prop("class"));
     //Q1.select(".find-me").after("<script>console.log('yay!');</script>");
 };
 

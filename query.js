@@ -604,7 +604,7 @@ class Query {
         let newNodes = [];
         this.nodes.forEach(function(node){
             let sibling = next ? node.nextElementSibling : node.previousElementSibling;
-            while (sibling && (sibling.nodeType != 1 || (sel ? !this._matches(sibling, sel) : true))) {
+            while (sibling && (sibling.nodeType != 1 || (sel ? !this._matches(sibling, sel) : false))) {
                 sibling = next ? sibling.nextElementSibling : sibling.previousElementSibling;
             }
             if(sibling && sibling.nodeType == 1){
