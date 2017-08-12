@@ -4,7 +4,7 @@
 class Query {
     constructor (sel = false, parent = false) {
         // Based on the jQuery regular expression to test if a string is html
-        this.regHTML    = /^(?:\s*(<[\w\W]+>)[^>]*)$/;
+        this.regHTML    = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/;
         this.length     = 0;
         let that        = this;
         this.nodes      = new Proxy([], {
@@ -62,13 +62,14 @@ class Query {
      */
     _select (sel, parent = false) {
         let nodes = [];
+        //console.log('type:', this._type(sel));
         switch(this._type(sel)){
             case "string":
                 parent = parent || document;
                 if(parent.nodeType != 1){
                     parent = document;
                 }
-                let found = this._selectAll(parent, sel);
+                let found = parent.querySelectorAll(sel);
                 for (let i=0; i<found.length; i++) {
                     if (found[i].nodeType == 1) {
                         nodes.push(found[i]);
@@ -87,19 +88,6 @@ class Query {
         return nodes;
     }
     /*
-     * Performs a query select against a node
-     * @param {Node} node
-     * @param {String} sel
-     * @returns {Array}
-     */
-    _selectAll(node, sel) {
-        let nodes = [];
-        try {
-            nodes = node.querySelectorAll(sel);
-        } catch (e) {}
-        return nodes;
-    }
-    /*
      * Determines the type of element
      * @param {type} elem
      * @returns {String|Boolean}
@@ -107,7 +95,6 @@ class Query {
     _type (elem) {
         switch(typeof(elem)){
             case "string":
-                elem = elem.trim();
                 // test if the string is a selector or html format
                 let match = elem = this.regHTML.exec(elem);
                 if(match){
@@ -184,8 +171,7 @@ class Query {
      * @returns {Array}
      */
     _getNodesFromString (html) {
-        let nodes   = [];
-        html        = "<html><head></head><body>" + html + "</body></html>";
+        let nodes       = [];
         let parsedNodes = new DOMParser().parseFromString(html, "text/html").querySelectorAll("body")[0].childNodes;
         for (let i=0; i<parsedNodes.length; i++) {
             if (parsedNodes[i].nodeType == 1) {
@@ -419,14 +405,14 @@ class Query {
     find (sel) {
         let newNodes = [];
         this.nodes.forEach(function(node){
-            let obj = this._selectAll(node, sel);
+            let obj = node.querySelectorAll(sel);
             for(let index in obj){
                 if(obj[index].nodeType == 1) {
                     newNodes.push(obj[index]);
                 }
             }
         }, this);
-        this._setNodes(newNodes);
+        this.nodes = newNodes;
         return this;
     }
     /*
@@ -497,7 +483,7 @@ class Query {
         if (!node) {
             return false;
         }
-        let nodes = this._selectAll(node.parentNode || node.document, sel), i = -1;
+        let nodes = (node.parentNode || node.document).querySelectorAll(sel), i = -1;
         while (nodes[++i] && nodes[i] != node);
         return !!nodes[i];
     }
@@ -604,7 +590,7 @@ class Query {
         let newNodes = [];
         this.nodes.forEach(function(node){
             let sibling = next ? node.nextElementSibling : node.previousElementSibling;
-            while (sibling && (sibling.nodeType != 1 || (sel ? !this._matches(sibling, sel) : false))) {
+            while (sibling && (sibling.nodeType != 1 || (sel ? !this._matches(sibling, sel) : true))) {
                 sibling = next ? sibling.nextElementSibling : sibling.previousElementSibling;
             }
             if(sibling && sibling.nodeType == 1){
@@ -622,7 +608,7 @@ class Query {
         let found = false
         this.nodes.forEach(function(node){
             if (!found) {
-                found = this._selectAll(node, sel).length > 0;
+                found = node.querySelectorAll(sel).length > 0;
             }
         }, this);
         return found;
@@ -633,12 +619,20 @@ class Query {
     * @returns {Query}
     */
     filter(test) {
+        // Create a set of Query objects for each node
+        let nodes = [];
+        this.nodes.forEach(function(node){
+            nodes.push(new Query(node));
+        });
         // Filter the nodes
-        let filtered = this.nodes.filter(function(node){
-            return this._matches(node, test);
-        }.bind(this));
+        let filtered = nodes.filter(test);
+        // Return the list back to node objects
+        let newNodes = [];
+        filtered.forEach(function(node){
+            newNodes.push(node);
+        });
         // Update the nodes list
-        this._setNodes(filtered);
+        this._setNodes(newNodes);
         return this
     }
 };

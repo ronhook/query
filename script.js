@@ -24,8 +24,10 @@ window.onload = function() {
     Q.select('.find-me span').each(function(node){
         console.log(node.is('.two'));
     });
+    Q1 = new Query(".find-me span").filter(":nth-child(even)");
     */
-    Q1 = new Query(".find-me span").text("Hello");
-    console.log('Q1:', Q1.text(), Q1);
+    Q1 = new Query(".three").prev(".one");
+    console.log('Q1:', Q1.length, Q1.prop("class"));
+    //Q1.select(".find-me").after("<script>console.log('yay!');</script>");
 };
 
