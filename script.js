@@ -25,7 +25,7 @@ window.onload = function() {
         console.log(node.is('.two'));
     });
     */
-    Q1 = new Query(".find-me span").text("Hello");
-    console.log('Q1:', Q1.text(), Q1);
+    Q1 = new Query(".find-me span").filter(":nth-child(even)");
+    console.log('Q1:', Q1.text(), Q1.length);
 };
 

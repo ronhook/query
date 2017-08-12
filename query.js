@@ -619,20 +619,12 @@ class Query {
     * @returns {Query}
     */
     filter(test) {
-        // Create a set of Query objects for each node
-        let nodes = [];
-        this.nodes.forEach(function(node){
-            nodes.push(new Query(node));
-        });
         // Filter the nodes
-        let filtered = nodes.filter(test);
-        // Return the list back to node objects
-        let newNodes = [];
-        filtered.forEach(function(node){
-            newNodes.push(node);
-        });
+        let filtered = this.nodes.filter(function(node){
+            return this._matches(node, test);
+        }.bind(this));
         // Update the nodes list
-        this._setNodes(newNodes);
+        this._setNodes(filtered);
         return this
     }
 };
