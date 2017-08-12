@@ -1,4 +1,4 @@
-**.trigger(event)**
+### .trigger(event)
 
 Adds an eventListener to the nodes
 
