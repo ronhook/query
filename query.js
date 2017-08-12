@@ -4,7 +4,7 @@
 class Query {
     constructor (sel = false, parent = false) {
         // Based on the jQuery regular expression to test if a string is html
-        this.regHTML    = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/;
+        this.regHTML    = /^(?:\s*(<[\w\W]+>)[^>]*)$/;
         this.length     = 0;
         let that        = this;
         this.nodes      = new Proxy([], {
@@ -62,7 +62,6 @@ class Query {
      */
     _select (sel, parent = false) {
         let nodes = [];
-        //console.log('type:', this._type(sel));
         switch(this._type(sel)){
             case "string":
                 parent = parent || document;
@@ -93,6 +92,7 @@ class Query {
      * @returns {String|Boolean}
      */
     _type (elem) {
+        elem = elem.trim();
         switch(typeof(elem)){
             case "string":
                 // test if the string is a selector or html format

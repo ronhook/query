@@ -24,8 +24,11 @@ window.onload = function() {
     Q.select('.find-me span').each(function(node){
         console.log(node.is('.two'));
     });
-    */
     Q1 = new Query(".find-me span").filter(":nth-child(even)");
-    console.log('Q1:', Q1.text(), Q1.length);
+    */
+   Q1 = new Query("<p>hi</p>");
+    console.log('Q1:', Q1.length);
+   Q1 = new Query("#content");
+    console.log('Q1:', Q1.length);
 };
 
