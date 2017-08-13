@@ -9,6 +9,7 @@ none
 **Returns** 
 
 Query Object
+
 **Example**
 
 <p data-height="300" data-theme-id="30862" data-slug-hash="oewRBX" data-default-tab="js,result" data-user="ronhook" data-embed-version="2" data-pen-title=".remove()" class="codepen">See the Pen <a href="https://codepen.io/ronhook/pen/oewRBX/">.remove()</a> by Ron Hook (<a href="https://codepen.io/ronhook">@ronhook</a>) on <a href="https://codepen.io">CodePen</a>.</p>
