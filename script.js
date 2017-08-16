@@ -26,8 +26,66 @@ window.onload = function() {
     });
     Q1 = new Query(".find-me span").filter(":nth-child(even)");
     */
-    Q1 = new Query(".three").prev(".one");
-    console.log('Q1:', Q1.length, Q1.prop("class"));
+    //Q1 = new Query(".three").prev(".one");
+    //console.log('Q1:', Q1.length, Q1.prop("class"));
     //Q1.select(".find-me").after("<script>console.log('yay!');</script>");
+
+
+    const count = 100000;
+    let counterA, counterB, JQ, nodes;
+    console.clear();
+
+    counterA = document.querySelectorAll("#counter-a")[0];
+
+    start = performance.now();
+    for (i=0; i<count; i++) {
+        nodes = document.querySelectorAll(".two");
+        /*
+        newNodes = [];
+        for (node of nodes) {
+            sibling = node.previousElementSibling;
+            while (sibling && sibling.nodeType != 1) {
+                sibling = sibling.previousElementSibling;
+            }
+            newNodes.push(node.previousElementSibling);
+        };
+        counterA.textContent = newNodes.length;
+        */
+        counterA.textContent = nodes.length;
+    }
+    native = performance.now() - start;
+
+    counterA = new Query("#counter-b");
+    start = performance.now();
+
+    for (i=0; i<count; i++) {
+        Q.select(".two");
+        //counterA.text(Q.length);
+        //Q.select(".two").prev();
+        counterA.text(Q.length);
+
+        //Q.select(".three").prev("span");
+        //counterB = new Query("#counter-b").text(Q.length);
+    }
+    query = performance.now() - start;
+
+    console.time("jQuery");
+    start = performance.now();
+    for (i=0; i<count; i++) {
+        //counterA.text($(".two").prev().length)
+        counterA.text($(".two").length)
+    }
+    jquery = performance.now() - start;
+    console.timeEnd("jQuery");
+
+    console.log({
+        native: native,
+        query: query,
+        loss: query - native,
+        jquery_loss: jquery - native,
+        save: jquery - query,
+        jquery: jquery
+    });
+
 };
 

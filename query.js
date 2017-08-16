@@ -6,17 +6,7 @@ class Query {
         // Based on the jQuery regular expression to test if a string is html
         this.regHTML    = /^(?:\s*(<[\w\W]+>)[^>]*)$/;
         this.length     = 0;
-        let that        = this;
-        this.nodes      = new Proxy([], {
-            get: function(tgt, prop) {
-                return tgt[prop];
-            },
-            set: function(tgt, prop, val) {
-                tgt[prop] = val;
-                that.length = tgt.length;
-                return true;
-            }
-        });
+        this.nodes      = [];
         if (sel) {
             this.select(sel, parent);
         }
@@ -51,7 +41,7 @@ class Query {
                 },true);
                 break;
         }
-        this._setNodes(this.nodes.concat(nodes));
+        this._setNodes(this.nodes.concat(nodes), false);
         return this;
     }
     /*
@@ -68,12 +58,7 @@ class Query {
                 if(parent.nodeType != 1){
                     parent = document;
                 }
-                let found = this._selectAll(parent, sel);
-                for (let i=0; i<found.length; i++) {
-                    if (found[i].nodeType == 1) {
-                        nodes.push(found[i]);
-                    }
-                }
+                nodes = this._selectAll(parent, sel);
                 break;
             case "node":
                 nodes.push(sel);
@@ -233,13 +218,13 @@ class Query {
      */
     text (text = false) {
         let val = undefined;
-        this.nodes.forEach(function(node){
+        for (let node of this.nodes) {
             if (text) {
                 node.textContent = text;
             } else if (val == undefined) {
                 val = node.textContent;
             }
-        });
+        }
         return text ? this : (val === undefined ? "" : val);
     }
     /**
@@ -506,14 +491,18 @@ class Query {
      * @param {Array} nodes
      * @returns {undefined}
      */
-    _setNodes (nodes) {
-        this.nodes.length = 0;
-        nodes.forEach(function(node){
-            // must be a unique set of nodes
-            if (!this.nodes.includes(node)) {
-                this.nodes.push(node);
+    _setNodes (nodes, clear = true) {
+        if (clear) {
+            this.nodes = nodes.entries();
+        } else {
+            for (let node of nodes) {
+                // must be a unique set of nodes
+                if (!this.nodes.includes(node)) {
+                    this.nodes.push(node);
+                }
             }
-        }, this);
+        }
+        this.length = this.nodes.length;
     }
     /*
      * Removes the nodes
